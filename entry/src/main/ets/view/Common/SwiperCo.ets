@@ -1,3 +1,4 @@
+import router from '@ohos.router';
 @Preview
 @Component
 export default struct SwiperCo {
@@ -28,6 +29,11 @@ export default struct SwiperCo {
             .width("100%")
 
           }
+          .onClick(() => {
+            router.pushUrl({
+              url: 'pages/PlayPage'
+            })
+          })
           .width('100%')
           .height(200)
           .backgroundImage($r(`app.media.${this.Image[Index]}`))

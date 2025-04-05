@@ -202,9 +202,6 @@ export default struct Mine {
         .backgroundColor(Color.White)
         .borderRadius(10)
         .divider({ strokeWidth: 0.05, color: Color.Gray, startMargin: 30, endMargin: 0 })
-
-
-
       }
       .width('100%')
     }

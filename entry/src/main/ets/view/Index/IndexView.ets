@@ -2,6 +2,7 @@ import { HomeName} from '../../ViewModel/HomeNumber'
 import {FirstName, FirstImage} from '../../ViewModel/HomeNumber'
 import SwiperCo from '../Common/SwiperCo'
 import RecommendCo1 from '../Common/RecommendCo1'
+import RecommendCo2 from '../Common/RecommendCo2'
 @Preview
 @Component
 export default struct IndexView {
@@ -50,6 +51,7 @@ export default struct IndexView {
                     Image : FirstImage
                   })
                   RecommendCo1()
+                  RecommendCo2()
                 }
               }
               .scrollBar(BarState.Off)
@@ -58,6 +60,8 @@ export default struct IndexView {
           .width('100%')
           .height('100%')
           .tabBar(HomeName[Index])
+
+
         })
       }
       .width('100%')

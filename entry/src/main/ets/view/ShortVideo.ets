@@ -4,26 +4,41 @@ export default struct ShortVideo {
   @State speed: number = 1
   @State key1 : number = 0
   @State xun : boolean = false
+  @State videoNumber : number = 0
   controller: VideoController = new VideoController()
   controller1: VideoController = new VideoController()
   SwiperController: SwiperController = new SwiperController()
   build() {
     Column() {
       Swiper(this.SwiperController) {
+        // 改写为懒加载时尽量用AVPlayer只预加载后一个视频
         ForEach(this.i,(item:string,Index) => {
           Stack({ alignContent : Alignment.Center }) {
             // if (Index == this.key1) {
+                if (this.videoNumber === Index) {
+                  Video({
+                    controller: this.controller,
+                    currentProgressRate: this.speed,
+                    src: `${this.i[Index]}`
+                  })
+                    .width('100%')
+                    .aspectRatio(1.6)
+                    .autoPlay(true)
+                    .objectFit(ImageFit.Contain)
+                }
+                else {
+                  Video({
+                    currentProgressRate: this.speed,
+                    src: `${this.i[Index]}`,
+                  })
+                    .width('100%')
+                    .aspectRatio(1.6)
+                    .objectFit(ImageFit.Contain)
+                }
+                  // .controls(false)
 
-              Video({
-                controller: this.controller,
-                currentProgressRate: this.speed,
-                src: `${this.i[Index]}`
-                // src: $rawfile('dijia.mp4')
-                // src: 'https://vd3.bdstatic.com/mda-pmj5ajqd7p4b6pgb/576p/h264/1703044058699262355/mda-pmj5ajqd7p4b6pgb.mp4?auth_key=1703138418-0-0-618ea72b33be241c96c6cff86c06e080&bcevod_channel=searchbox_feed&cr=1&cd=0&pd=1&pt=4&logid=0018430194&vid=9762003448174112444&abtest=all'
-              })
-                .width('100%')
-                .aspectRatio(1.6)
-                .autoPlay(true)   //自动播放
+
+                  // .autoPlay(true)
                 // .controls(false)  //播放栏是否显示
             // }
             // else {
@@ -83,30 +98,37 @@ export default struct ShortVideo {
       .vertical(true)
       .indicator(false)   //不显示导航点
       .loop(false)
-      .onAnimationStart(() => {
-        this.key1++
-        this.controller.setCurrentTime(0)
-        this.controller.reset()
-        this.controller1.setCurrentTime(0)
-        // this.controller.reset()
+      .onAnimationStart((index: number, targetIndex: number, extraInfo: SwiperAnimationEvent) => {
+        if (index === targetIndex) {
+          return
+        }
+        else {
+          this.videoNumber = targetIndex
+          this.controller.setCurrentTime(0)
+        }
       })
+      // .onAnimationStart(() => {
+      //   this.key1++
+      //   this.controller.setCurrentTime(0)
+      //   this.controller.reset()
+      //   this.controller1.setCurrentTime(0)
+      //   // this.controller.reset()
+      // })
       // .disableSwipe(true) //是否允许滑动切换
 
 
+      //以下为刚开是感觉可以绑定手势的代码，目前看没什么用
       // .onChange(() => {
       //   this.key1++
       //   this.controller.setCurrentTime(0)
       //   this.controller1.setCurrentTime(0)
       //   // this.controller.reset()
       // })
-
-
       // .onTouch((event) => {
       //   let a = event.type
       //   if (a == TouchType.Up) {
       //     this.xun = true
       //   }
-      //
       // })
       // .onGestureSwipe((Index1,event) => {
       //   const currentOffset = event.currentOffset;

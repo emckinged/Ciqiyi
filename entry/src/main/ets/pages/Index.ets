@@ -1,10 +1,12 @@
 import { router } from '@kit.ArkUI'
 import { PageNumber , PageName , PageSVG} from '../ViewModel/PageNumber'
 import IndexView from '../view/Index/IndexView'
+import RecommendCo2 from '../view/Common/RecommendCo2'
 
 @Entry
 @Component
 struct Index {
+
   @Builder
   tabBarBuilder(itemIndex : number) {
     Column() {
@@ -37,9 +39,9 @@ struct Index {
   build() {
     Column() {
       Tabs() {
-
         // ForEach(this.ite,(item : string,Index) => {
         ForEach(PageName,(item : string,Index) => {
+
           TabContent() {
             if (Index == 0) {
               Column() {
@@ -48,6 +50,7 @@ struct Index {
             }
           }
           .tabBar(this.tabBarBuilder(Index))
+
         })
 
       }

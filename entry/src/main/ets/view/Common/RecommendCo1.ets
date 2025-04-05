@@ -11,13 +11,15 @@ export default struct RecommendCo1 {
       List() {
         ForEach(this.i,(item : string,Index) => {
           ListItem() {
-            Card()
+            Card({n1:Index})
           }
         })
+        ListItem()
+          // .height(20)
       }
+      // .height('100%')
       .lanes(2)
     }
-    // .width('100%')
     // .height('100%')
   }
 }

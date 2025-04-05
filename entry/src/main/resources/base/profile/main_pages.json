@@ -4,6 +4,7 @@
     "pages/MinePage",
     "pages/FindPage",
     "pages/VideoPage",
-    "pages/VIPPage"
+    "pages/VIPPage",
+    "pages/PlayPage"
   ]
 }
